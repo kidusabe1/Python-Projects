@@ -133,10 +133,15 @@ def view_tasks():
         if("When you have free time" in task):
             free_time+=1
     def edit_task():
-        edit_task_label=tkinter.Label(view_page,text="Edit Task",bg="#F27B2C",fg="white",width = 20, height = 1,font=("Helvetica",15,"bold"))
-        edit_task_label.grid(row=3,column=0,pady=(5,2))
+        edit_task_label=tkinter.Label(view_page,text="Edit Task",bg="#151A30",fg="white",width = 20, height = 1,font=("Helvetica",15,"bold"))
+        edit_task_label.grid(row=3,column=0,pady=(5,2),padx=(100,0))
+        """
+        edit_task_page_frame=tkinter.Frame(view_page)
+        edit_task_page_frame.configure(width=500,height=600)
+        edit_task_page_frame.grid(row)
+        """
         task_rename_entry=tkinter.Entry(view_page,width=30)
-        task_rename_entry.grid(row=4,column=0,pady=(2,3))
+        task_rename_entry.grid(row=4,column=0,pady=(2,3),padx=(100,0))
         task_rename_entry.insert(0,"Add new task detail")
         options_1 =(
             "Study",
@@ -149,15 +154,15 @@ def view_tasks():
     #category_list=
     ##################################
         category_label=tkinter.Label(view_page,text="Category",bg="#151A30",fg="white",width = 20, height = 1,font=("Helvetica",12,"bold"))
-        category_label.grid(row=5,column=0,pady=(2,2))
+        category_label.grid(row=5,column=0,pady=(2,2),padx=(100,0))
         
         clicked= tkinter.StringVar()
         clicked.set(options_1[0])
         drop_down_menu1= tkinter.OptionMenu(view_page, clicked, *options_1)
-        drop_down_menu1.grid(row=6,column=0,pady=(2,5))
+        drop_down_menu1.grid(row=6,column=0,pady=(2,5),padx=(100,0))
 
         priority_label=tkinter.Label(view_page,text="Priority",bg="#151A30",fg="white",width = 20, height = 1,font=("Helvetica",12,"bold"))
-        priority_label.grid(row=7,column=0,pady=(2,2))
+        priority_label.grid(row=7,column=0,pady=(2,2),padx=(100,0))
         options_2 =(
             "Today",
             "Tomorrow",
@@ -170,7 +175,7 @@ def view_tasks():
         clicked_2.set(options_2[0])
 
         drop_down_menu2= tkinter.OptionMenu(view_page, clicked_2, *options_2)
-        drop_down_menu2.grid(row=8,column=0,pady=(2,2))
+        drop_down_menu2.grid(row=8,column=0,pady=(2,2),padx=(100,0))
         def update_task():
             new_task[i]=[task_rename_entry.get(),clicked.get(),clicked_2.get()]
             tkinter.messagebox.showinfo(title="Success",message="Task Updated!")
@@ -187,10 +192,13 @@ def view_tasks():
         #print(updated_task)
 
         update_task_button=tkinter.Button(view_page,text="Update Task",bg="#4706FF",fg="white",font=("Helvetica",12,"bold"),width = 20, height = 1,command=update_task)
-        update_task_button.grid(row=9,column=0,pady=(2,2))
+        update_task_button.grid(row=9,column=0,pady=(5,2),padx=(100,0))
         
-        delete_task_button=tkinter.Button(view_page,text="Delete Task",bg="#FF1FCB",fg="white",font=("Helvetica",12,"bold"),width = 20, height = 1,command=remove_task)
-        delete_task_button.grid(row=10,column=0,pady=(2,2))
+        delete_task_button=tkinter.Button(view_page,text="Delete Task",bg="#F70000",fg="white",font=("Helvetica",12,"bold"),width = 20, height = 1,command=remove_task)
+        delete_task_button.grid(row=10,column=0,pady=(2,2),padx=(100,0))
+        
+        go_back_mainpage_button= tkinter.Button(view_page,text="Go to Main Page", width=25, font=("Arial",12,"bold") , bg="#2F80CF",fg="white",command=lambda:[view_page.withdraw(),root.deiconify()])
+        go_back_mainpage_button.grid(row=11,column=0,pady=(7,0),padx=(100,0))
 
     def search_task():
         def remove_task():
@@ -207,7 +215,6 @@ def view_tasks():
         if (any(searched in e[0] for e in new_task)) and len(searched)>0:
             categoryy.destroy()
             total_tasks.destroy()
-
             Priority.destroy()
             today.destroy()
 
@@ -230,12 +237,16 @@ def view_tasks():
                 font = ("Helvetica", 12, "bold"),
                 justify="left")
             Result.grid(row=0,column=0,pady=(0,5))
-            edit_task_button=tkinter.Button(view_page,text="Edit Task",bg="#0E97FF",fg="white",font=("Helvetica",12,"bold"),width = 20, height = 1,command=lambda: [edit_task_button.destroy(),delete_task_button.destroy(), edit_task()])
-            edit_task_button.grid(row=3,column=0,pady=(0,10))
-            delete_task_button=tkinter.Button(view_page,text="Delete Task",bg="#4200FE",fg="white",font=("Helvetica",12,"bold"),width = 20, height = 1,command=remove_task)
-            delete_task_button.grid(row=4,column=0)
+            edit_task_button=tkinter.Button(result_frame,text="Edit Task",bg="#0E97FF",fg="white",font=("Helvetica",12,"bold"),width = 20, height = 1,command=lambda: [go_back_mainpage_button.destroy(), edit_task_button.grid_forget(),delete_task_button.destroy(), edit_task()])
+            edit_task_button.grid(row=1,column=0,pady=(0,10),padx=(50,0))
+            delete_task_button=tkinter.Button(result_frame,text="Delete Task",bg="#4200FE",fg="white",font=("Helvetica",12,"bold"),width = 20, height = 1,command=remove_task)
+            delete_task_button.grid(row=2,column=0,padx=(50,0))
+            go_back_mainpage_button= tkinter.Button(view_page,text="Go to Main Page", width=30, font=("Arial",12,"bold") , bg="#2F80CF",fg="white",command=lambda:[view_page.withdraw(),root.deiconify()])
+            go_back_mainpage_button.grid(row=3,column=0,pady=(80,0),padx=(100,0))
         else:
-            tkinter.messagebox.showerror(title="Empty Search",message="Empty Search Not Allowed")
+            tkinter.messagebox.showerror(title="Empty Search",message="Task Not Found!")
+            go_back_mainpage_button= tkinter.Button(view_page,text="Go to Main Page", width=30, font=("Arial",12,"bold") , bg="#2F80CF",fg="white",command=lambda:[view_page.withdraw(),root.deiconify()])
+            go_back_mainpage_button.grid(row=3,column=0,pady=(80,0),padx=(100,0))
 
     
     view_page=tkinter.Toplevel(root)
@@ -251,7 +262,7 @@ def view_tasks():
     search_entry.grid(row=0,column=0,pady=(100,0),padx=(110,0))
     #searched=search_entry.get()
     
-    search_button=tkinter.Button(frame_view_page,text="Search task",bg="#6512FE",fg="white",font=("Helvetica",12,"bold"),command=search_task)
+    search_button=tkinter.Button(frame_view_page,text="Search task",bg="#6512FE",fg="white",font=("Helvetica",12,"bold"),command=lambda:[go_back_mainpage_button.destroy(),search_task()])
     search_button.grid(row=1,column=0,pady=(10,0),padx=(100,0))
     
     categoryy=tkinter.Label(frame_view_page,text="Based On Category", fg="white",bg="#151A30",font = ("Helvtica", 20, "bold") )
@@ -274,6 +285,8 @@ def view_tasks():
     Priority.grid(row=7,column=0,padx=(100,0))
     today=tkinter.Label(frame_view_page,text=f"""Today:      {today_counter}\nTomorrow:      {tomorrow_counter}\nIn the weekend:      {weekend_counter}\nWhenever you are free:      {free_time}""", fg="white",bg="#151A30",font = ("Helvetica", 15, "bold"),justify="left")
     today.grid(row=8,column=0,padx=(100,0))
+    go_back_mainpage_button= tkinter.Button(frame_view_page,text="Go to Main Page", width=30, font=("Arial",12,"bold") , bg="#2F80CF",fg="white",command=lambda:[view_page.withdraw(),root.deiconify()])
+    go_back_mainpage_button.grid(row=9,column=0,columnspan=2,padx=(100,0),pady=(10,0))
 # Creating the main window
 root= tkinter.Tk()
 root.title("My To Do List")
@@ -287,7 +300,7 @@ head_title.pack(pady=(100,0))
 add_new_task_button= tkinter.Button(root, text="Add New task", width=40,height=2,font = ("Helvetica", 12,"bold") ,command= lambda:[root.withdraw(),add_new_task()], bg="#12A6FE",fg="white")
 add_new_task_button.pack(pady=(5,5))
 
-view_tasks_button= tkinter.Button(root, text="View tasks", width=40,height=2,font = ("Helvetica", 12,"bold"), command= view_tasks, bg="#4900FE",fg="white")
+view_tasks_button= tkinter.Button(root, text="View tasks", width=40,height=2,font = ("Helvetica", 12,"bold"), command=lambda:[root.withdraw(),view_tasks()], bg="#4900FE",fg="white")
 view_tasks_button.pack(pady=(5,15))
 
 root.mainloop()
