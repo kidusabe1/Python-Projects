@@ -59,7 +59,7 @@ def add_new_task():
         "Today",
         "Tomorrow",
         "In the Weekend",
-        "When you have free time"
+        "Whenever"
     )
 
     # This variable gets varying selected text from dropdown box 2
@@ -110,7 +110,7 @@ def add_new_task():
 
     save_task_button= tkinter.Button(frame_all,text="Add Task", width=30, font=("Arial",12,"bold") , bg="#F27B2C",fg="white",command=save_task)
     save_task_button.grid(row=3,column=0,columnspan=2)
-    go_back_mainpage_button= tkinter.Button(frame_all,text="Go to Main Page", width=30, font=("Arial",12,"bold") , bg="#2F80CF",fg="white",command=lambda:[new_win.withdraw(),root.deiconify()])
+    go_back_mainpage_button= tkinter.Button(frame_all,text="Go to Main Page", width=30, font=("Arial",12,"bold") , bg="#2F80CF",fg="white",command=lambda:[new_win.destroy(),root.deiconify()])
     go_back_mainpage_button.grid(row=4,column=0,columnspan=2,pady=(10,0))
     #save_task_button.place(relx=0.5, rely=0.5, anchor=tkinter.SE)
 
@@ -130,7 +130,7 @@ def view_tasks():
             tomorrow_counter+=1
         if("In the Weekend" in task):
             weekend_counter+=1
-        if("When you have free time" in task):
+        if("Whenever" in task):
             free_time+=1
     def edit_task():
         edit_task_label=tkinter.Label(view_page,text="Edit Task",bg="#151A30",fg="white",width = 20, height = 1,font=("Helvetica",15,"bold"))
@@ -167,7 +167,7 @@ def view_tasks():
             "Today",
             "Tomorrow",
             "In the Weekend",
-            "When you have free time"
+            "Whenever"
         )
 
         # This variable gets varying selected text from dropdown box 2
@@ -197,7 +197,7 @@ def view_tasks():
         delete_task_button=tkinter.Button(view_page,text="Delete Task",bg="#F70000",fg="white",font=("Helvetica",12,"bold"),width = 20, height = 1,command=remove_task)
         delete_task_button.grid(row=10,column=0,pady=(2,2),padx=(100,0))
         
-        go_back_mainpage_button= tkinter.Button(view_page,text="Go to Main Page", width=25, font=("Arial",12,"bold") , bg="#2F80CF",fg="white",command=lambda:[view_page.withdraw(),root.deiconify()])
+        go_back_mainpage_button= tkinter.Button(view_page,text="Go to Main Page", width=25, font=("Arial",12,"bold") , bg="#2F80CF",fg="white",command=lambda:[view_page.destroy(),root.deiconify()])
         go_back_mainpage_button.grid(row=11,column=0,pady=(7,0),padx=(100,0))
 
     def search_task():
@@ -241,11 +241,11 @@ def view_tasks():
             edit_task_button.grid(row=1,column=0,pady=(0,10),padx=(50,0))
             delete_task_button=tkinter.Button(result_frame,text="Delete Task",bg="#4200FE",fg="white",font=("Helvetica",12,"bold"),width = 20, height = 1,command=remove_task)
             delete_task_button.grid(row=2,column=0,padx=(50,0))
-            go_back_mainpage_button= tkinter.Button(view_page,text="Go to Main Page", width=30, font=("Arial",12,"bold") , bg="#2F80CF",fg="white",command=lambda:[view_page.withdraw(),root.deiconify()])
+            go_back_mainpage_button= tkinter.Button(view_page,text="Go to Main Page", width=30, font=("Arial",12,"bold") , bg="#2F80CF",fg="white",command=lambda:[view_page.destroy(),root.deiconify()])
             go_back_mainpage_button.grid(row=3,column=0,pady=(80,0),padx=(100,0))
         else:
             tkinter.messagebox.showerror(title="Empty Search",message="Task Not Found!")
-            go_back_mainpage_button= tkinter.Button(view_page,text="Go to Main Page", width=30, font=("Arial",12,"bold") , bg="#2F80CF",fg="white",command=lambda:[view_page.withdraw(),root.deiconify()])
+            go_back_mainpage_button= tkinter.Button(view_page,text="Go to Main Page", width=30, font=("Arial",12,"bold") , bg="#2F80CF",fg="white",command=lambda:[view_page.destroy(),root.deiconify()])
             go_back_mainpage_button.grid(row=3,column=0,pady=(80,0),padx=(100,0))
 
     
@@ -283,9 +283,9 @@ def view_tasks():
 """
     Priority=tkinter.Label(frame_view_page,text="Based On Priority", fg="white",bg="#151A30",font = ("Helvetica", 20, "bold"))
     Priority.grid(row=7,column=0,padx=(100,0))
-    today=tkinter.Label(frame_view_page,text=f"""Today:      {today_counter}\nTomorrow:      {tomorrow_counter}\nIn the weekend:      {weekend_counter}\nWhenever you are free:      {free_time}""", fg="white",bg="#151A30",font = ("Helvetica", 15, "bold"),justify="left")
+    today=tkinter.Label(frame_view_page,text=f"""Today:      {today_counter}\nTomorrow:      {tomorrow_counter}\nIn the weekend:      {weekend_counter}\nWhenever:      {free_time}""", fg="white",bg="#151A30",font = ("Helvetica", 15, "bold"),justify="left")
     today.grid(row=8,column=0,padx=(100,0))
-    go_back_mainpage_button= tkinter.Button(frame_view_page,text="Go to Main Page", width=30, font=("Arial",12,"bold") , bg="#2F80CF",fg="white",command=lambda:[view_page.withdraw(),root.deiconify()])
+    go_back_mainpage_button= tkinter.Button(frame_view_page,text="Go to Main Page", width=30, font=("Arial",12,"bold") , bg="#2F80CF",fg="white",command=lambda:[view_page.destroy(),root.deiconify()])
     go_back_mainpage_button.grid(row=9,column=0,columnspan=2,padx=(100,0),pady=(10,0))
 # Creating the main window
 root= tkinter.Tk()
